@@ -95,7 +95,7 @@ func setupClient() *kubernetes.Clientset {
 func getMinionNodes(c *kubernetes.Clientset) *api.NodeList {
 	nodes, err := c.Core().Nodes().List(
 		metav1.ListOptions{
-			FieldSelector: "spec.unschedulable=false",
+			LabelSelector: "node-role.kubernetes.io/worker=true",
 		})
 	if err != nil {
 		fmt.Println("Failed to fetch nodes", err)
